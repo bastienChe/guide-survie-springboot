@@ -1,6 +1,7 @@
 package guide.survie.springboot.web;
 
 import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,19 @@ import java.util.Set;
 @RestController
 @RequestMapping("/bookstore")
 class BookStoreController {
+
+    @Value("${books.max-books-authorized}")
+    private int maxBooksAuthorized;
+
+    @Value("${books.admin.email}")
+    private String adminEmail;
+
+    @Value("${books.admin.name}")
+    private String adminName;
+
+    @Value("${books.admin.send-email-on-delete}")
+    private boolean sendEmailOnDelete;
+
     private List<BookDTO> books = new ArrayList<>();
 
     @GetMapping("/books")
@@ -47,14 +61,21 @@ class BookStoreController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO book) {
+    public ResponseEntity<?> createBook(@RequestBody @Valid BookDTO book) {
+        if (books.size() >= maxBooksAuthorized) {
+            return ResponseEntity.badRequest().build();
+        }
         books.add(book);
-        return ResponseEntity.ok(book );
+        return ResponseEntity.ok(book);
     }
 
     @DeleteMapping("/books/{id}/delete")
     public ResponseEntity<String> deleteBook(@PathVariable int id) {
         books.remove(id);
+        System.out.println(sendEmailOnDelete);
+        if (sendEmailOnDelete) {
+            System.out.println("send an email to "+adminName+" : "+ adminEmail);
+        }
         return ResponseEntity.ok("book removed");
     }
 

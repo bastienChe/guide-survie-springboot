@@ -5,4 +5,11 @@ server:
 
 spring:
   application:
-  name: 'guide-survie-springboot'
+    name: 'guide-survie-springboot'
+
+books:
+  max-books-authorized: 3
+  admin:
+    send-email-on-delete: false
+    email: ""
+    name: ""

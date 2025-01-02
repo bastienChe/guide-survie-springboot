@@ -1,0 +1,13 @@
+
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+books:
+  max-books-authorized: 5
+  admin:
+    send-email-on-delete: true
+    email: "admin@example.com"
+    name: "John Doe"
+
