@@ -1,5 +1,6 @@
 package guide.survie.springboot.web;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -46,7 +47,7 @@ class BookStoreController {
     }
 
     @PostMapping("/books")
-    public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO book) {
+    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO book) {
         books.add(book);
         return ResponseEntity.ok(book );
     }
@@ -58,7 +59,7 @@ class BookStoreController {
     }
 
     @PutMapping("/books/{id}")
-    public ResponseEntity<BookDTO> updateBook(@PathVariable int id, @RequestBody BookDTO book) {
+    public ResponseEntity<BookDTO> updateBook(@PathVariable int id, @RequestBody @Valid BookDTO book) {
         books.set(id, book);
         return ResponseEntity.ok(book);
     }
