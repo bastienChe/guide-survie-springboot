@@ -1,8 +1,17 @@
 package guide.survie.springboot.web;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 public class BookDTO {
+
+    @NotBlank(message = "Name is mandatory")
     String name;
+
+    @NotBlank(message = "Author is mandatory")
     String author;
+
+    @NotNull(message = "Kind is mandatory")
     Kind kind;
 
     public BookDTO(String name, String author, Kind kind) {

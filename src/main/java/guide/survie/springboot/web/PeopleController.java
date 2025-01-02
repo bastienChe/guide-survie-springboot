@@ -33,5 +33,4 @@ class PeopleController {
         return ResponseEntity.ok("person removed");
     }
 
-
 }
