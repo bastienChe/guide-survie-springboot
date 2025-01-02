@@ -33,11 +33,5 @@ class PeopleController {
         return ResponseEntity.ok("person removed");
     }
 
-    /*
-        Problèmes : GET sur id qui n'existe pas = exception
-                    Delete sur id qui n'existe pas = exception
-                    Pas de PUT pour modifier un enregistrement existant
-                    Pas de validation de contenu (name peut être vide)
-     */
 
 }
