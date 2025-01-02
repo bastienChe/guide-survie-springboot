@@ -1,5 +1,6 @@
 package guide.survie.springboot.web;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,7 +23,7 @@ class PeopleController {
     }
 
     @PostMapping("")
-    public ResponseEntity<PersonDTO> createPerson(@RequestBody PersonDTO person) {
+    public ResponseEntity<PersonDTO> createPerson(@RequestBody @Valid PersonDTO person) {
         people.add(person);
         return ResponseEntity.ok(person);
     }
